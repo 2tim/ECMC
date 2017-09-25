@@ -27,6 +27,9 @@ Then you can run with:
 
 Results will be printed to the screen.
 
+Recommendations
+---------------
+
 Recommendations for dealing with floating point currency input would be to use the python-money package:
 https://github.com/carlospalol/money
 
