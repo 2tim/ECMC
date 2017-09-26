@@ -44,9 +44,9 @@ Recommendations
 
 ### Update 9/26/2017:
 
-Implemented the recomendations below. Now using the python money library for dealing wiht the currency.
+Implemented the recommendations below. Now using the python money library for dealing with the currency.
 
-Recommendations for dealing with floating point currency input would be to use the python-money package:
-https://github.com/carlospalol/money
+~~Recommendations for dealing with floating point currency input would be to use the python-money package:~~
+~~https://github.com/carlospalol/money~~
 
-The code would be adapted to use the library to convert the raw float64 item to a python money object. The project is mature, follows industry standards and is easy to use.
+~~The code would be adapted to use the library to convert the raw float64 item to a python money object. The project is mature, follows industry standards and is easy to use.~~
