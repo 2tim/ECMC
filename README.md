@@ -39,7 +39,7 @@ Install the needed packages:
 
 Results will be printed to the screen:
 
-![results][https://github.com/2tim/ECMC/raw/master/screen_print.png]
+![result](https://github.com/2tim/ECMC/raw/master/screen_print.png "results")
 
 Recommendations
 ---------------
