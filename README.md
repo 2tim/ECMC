@@ -37,7 +37,9 @@ Install the needed packages:
 
 `python3 data_reader.py`
 
-Results will be printed to the screen.
+Results will be printed to the screen:
+
+![results][screen_print.png]
 
 Recommendations
 ---------------
