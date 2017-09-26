@@ -38,3 +38,11 @@ Install the needed packages:
 `python3 data_reader.py`
 
 Results will be printed to the screen.
+
+Recommendations
+---------------
+
+Recommendations for dealing with floating point currency input would be to use the python-money package:
+https://github.com/carlospalol/money
+
+The code would be adapted to use the library to convert the raw float64 item to a python money object. The project is mature, follows industry standards and is easy to use.
