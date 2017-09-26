@@ -10,14 +10,6 @@ TODO: Additional consideration should be taken for effectively handling floating
 business rules.
 '''
 
-class USD(Money):
-    def __init__(self, amount='0'):
-        super().__init__(amount=amount, currency='USD')
-
-# def money_maker(float_money, currency='USD'):
-#     m = Money(amount=float_money, currency=currency)
-#     return
-
 with open("byte-reader/data.dat", 'rb') as data:
     system = data.read(4)
     version = int.from_bytes(data.read(1), 'big', signed=False)
@@ -28,7 +20,6 @@ with open("byte-reader/data.dat", 'rb') as data:
     autopays = 0
     ended = 0
     special_balance = Money(0, currency='USD')
-    # Found number of records to be
     for _ in range(num_records+1):
         record = {"enum": int(data.read(1).hex())}
         record.update(
@@ -62,7 +53,7 @@ with open("byte-reader/data.dat", 'rb') as data:
             ended += 1
         records.append(record)
     print("What is the total amount in dollars of debits?")
-    #Assumes simple rounding here
+    # Assumes simple rounding here
     print(dollar_debits.format('en_US'))
     print("What is the total amount in dollars of credits?")
     print(dollar_credits.format('en_US'))
