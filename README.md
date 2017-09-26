@@ -42,6 +42,10 @@ Results will be printed to the screen.
 Recommendations
 ---------------
 
+### Update 9/26/2017:
+
+Implemented the recomendations below. Now using the python money library for dealing wiht the currency.
+
 Recommendations for dealing with floating point currency input would be to use the python-money package:
 https://github.com/carlospalol/money
 
