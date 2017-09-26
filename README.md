@@ -23,6 +23,18 @@ Then you can run with:
 
 `cd ECMC`
 
+Create a virtual environment:
+
+If needed install the base virtualenvwrapper (http://virtualenvwrapper.readthedocs.io/en/latest/install.html):
+
+`pip3 install virtualenvwrapper`
+
+`mkvirtualenv ecmc`
+
+Install the needed packages:
+
+`pip install -r requirements.txt`
+
 `python3 data_reader.py`
 
 Results will be printed to the screen.

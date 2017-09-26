@@ -1,5 +1,5 @@
 import struct
-import pprint
+from money import Money
 
 '''
 See field definition size and rules in ./byte-reader/README.md
@@ -10,16 +10,24 @@ TODO: Additional consideration should be taken for effectively handling floating
 business rules.
 '''
 
+class USD(Money):
+    def __init__(self, amount='0'):
+        super().__init__(amount=amount, currency='USD')
+
+# def money_maker(float_money, currency='USD'):
+#     m = Money(amount=float_money, currency=currency)
+#     return
+
 with open("byte-reader/data.dat", 'rb') as data:
     system = data.read(4)
     version = int.from_bytes(data.read(1), 'big', signed=False)
     num_records = int.from_bytes(data.read(4), 'big', signed=False)
     records = []
-    dollar_debits = 0.0
-    dollar_credits = 0.0
+    dollar_debits = Money(0, currency='USD')
+    dollar_credits = Money(0, currency='USD')
     autopays = 0
     ended = 0
-    special_balance = 0.0
+    special_balance = Money(0, currency='USD')
     # Found number of records to be
     for _ in range(num_records+1):
         record = {"enum": int(data.read(1).hex())}
@@ -33,18 +41,19 @@ with open("byte-reader/data.dat", 'rb') as data:
         if record.get("enum") <= 0x01:
             raw_float = data.read(8)
             # using '!' for network byte order and 'd' for float64 conversion to double, which is a python float
-            amount = struct.unpack('!d', raw_float)[0]
+            raw_amount = struct.unpack('!d', raw_float)[0]
+            amount = Money(raw_amount, currency='USD')
             record.update({"amount": amount})
             # Debit
             if record.get("enum") == 0x00:
-                dollar_debits += amount
+                dollar_debits = dollar_debits + amount
                 if record.get("uid") == 2456938384156277127:
-                    special_balance += amount
+                    special_balance = special_balance + amount
             # Credit
             else:
-                dollar_credits += amount
+                dollar_credits = dollar_credits + amount
                 if record.get("uid") == 2456938384156277127:
-                    special_balance -= amount
+                    special_balance = special_balance - amount
         # StartAutopay
         elif record.get("enum") == 0x02:
             autopays += 1
@@ -54,12 +63,12 @@ with open("byte-reader/data.dat", 'rb') as data:
         records.append(record)
     print("What is the total amount in dollars of debits?")
     #Assumes simple rounding here
-    print("$%.2f" % dollar_debits)
+    print(dollar_debits.format('en_US'))
     print("What is the total amount in dollars of credits?")
-    print("$%.2f" % dollar_credits)
+    print(dollar_credits.format('en_US'))
     print("How many autopays were started?")
     print("{} autopays where started".format(autopays))
     print("How many autopays were ended?")
     print("{} autopays where ended".format(ended))
     print("What is balance of user ID 2456938384156277127?")
-    print("$%.2f" % special_balance)
+    print(special_balance.format('en_US'))
