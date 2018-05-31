@@ -20,7 +20,7 @@ with open("byte-reader/data.dat", 'rb') as data:
     autopays = 0
     ended = 0
     special_balance = Money(0, currency='USD')
-    for _ in range(num_records+1):
+    for _ in range(num_records):
         record = {"enum": int(data.read(1).hex())}
         record.update(
             {
